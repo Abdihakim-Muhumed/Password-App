@@ -1,15 +1,15 @@
 class User:
     """user class"""
-
+    users = []
     def __init__(self, userName,password):
         '''Method for creating a user object'''
         self.userName = userName
         self.password = password
 
 
-
 class Credential:
     '''user credentials class'''
+    credentials = []
 
     def __init__(self, name,user_name,pass_word):
         '''Method to instantiate credential objec'''
