@@ -6,6 +6,17 @@ class User:
         self.userName = userName
         self.password = password
 
+    def saveUser(self):
+        '''Method to save new user in the users list'''
+        User.users.append(self)
+
+
+    @classmethod
+    def findUser(cls,name):
+        for user in cls.users:
+            if user.userName == name:
+                return user
+
 
 class Credential:
     '''user credentials class'''
