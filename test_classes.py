@@ -28,7 +28,6 @@ class TestUser(unittest.TestCase):
         self.new_user.saveUser()
         self.assertEqual(len(User.users),1)
 
-
     def test_findUser(self):
         '''Test case method to test for functionality find user'''
         self.new_user.saveUser()
@@ -36,6 +35,60 @@ class TestUser(unittest.TestCase):
         confirm_user.saveUser()
         found_user = User.findUser("Ali@234")
         self.assertEqual(found_user.userName,confirm_user.userName)
+
+    def test_saveCredentials(self):
+        '''Method to test if the user credentials are being saved'''
+        self.new_user.saveUser()
+        test_user = User('Abdihakim99','ABDULHAKIM')
+        test_user.saveUser()
+        credential1= Credential('Facebook','Abdihakim9_','ABDULHAKIM')
+        test_user.saveCredentials(credential1)
+        self.assertEqual(len(test_user.credentials),1)
+
+    def test_findCredentials(self):
+        '''Method to find a credential of a user'''
+        self.new_user.saveUser()
+        test_user2 = User('Abdihakim99','ABDULHAKIM')
+        test_user2.saveUser()
+        credential2 = Credential('Facebook','Abdihakim9_','ABDULHAKIM')
+        test_user2.saveCredentials(credential2)
+        found_credential1 = test_user2.findCredentials('Facebook')
+        self.assertEqual(found_credential1.account_name,credential2.account_name)
+
+    def test_deleteCredentials(self):
+        '''test case method to taste use method deletCredentials()'''
+        self.new_user.saveUser()
+        test_user3= User('Abdihakim017','CIT0017')
+        test_user3.saveUser()
+        credential3 = Credential('Gmail','Abdihakim.0017@gmail.com','CIT-017')
+        credential4 = Credential('Instagram','Abdihakym22','Week1234')
+        test_user3.saveCredentials(credential3)
+        test_user3.saveCredentials(credential4)
+        test_user3.deleteCredentials('Instagram')
+        self.assertEqual(len(test_user3.credentials),1)
+
+    def test_viewAllCredentials(self):
+        '''test case method to test view all credentials of a user behaviour of the user class'''
+        self.new_user.saveUser()
+        test_user4 = User('Abdul De Matchan','Abdul1234')
+        test_user4.saveUser()
+        credential5 = Credential('Instagram','Abdul_De_','Abdul1234')
+        credential6 = Credential('Facebook','Abdul_De_2','Abdul2341')
+        test_user4.saveCredentials(credential5)
+        test_user4.saveCredentials(credential6)
+        self.assertEqual(test_user4.viewAllCredentials(),test_user4.credentials)
+
+    def test_deleteAllCredentials(self):
+        '''test case method to test if deleteAllCredentials method of a user is functional'''
+        self.new_user.saveUser()
+        test_user5 = User('Ali kimmich','Kimmich@123')
+        test_user5.saveUser()
+        credential7 = Credential('Snapchat','Kimmic_ali','Kimmich1234')
+        credential8 = Credential('IG','Kimmicx','Kimmix123')
+        test_user5.saveCredentials(credential7)
+        test_user5.saveCredentials(credential8)
+        test_user5.deleteAllCredentials()
+        self.assertEqual(len(test_user5.credentials),0)
 
 
 class TestCredentiasl(unittest.TestCase):
@@ -46,44 +99,11 @@ class TestCredentiasl(unittest.TestCase):
     def setUp(self):
         self.new_credential = Credential('Instagram','Abdihakim9_','Abdulhakim@9')
 
-    def tearDown(self):
-        '''tearDown method to set User list to to 0'''
-        Credential.credentials = []
-
     def test__init__(self):
         '''tets__init__ test case to check for proper credential object initialization'''
         self.assertEqual(self.new_credential.account_name,'Instagram')
         self.assertEqual(self.new_credential.user_name,'Abdihakim9_')
         self.assertEqual(self.new_credential.pass_word,'Abdulhakim@9')
-
-    def test_saveCredential(self):
-        self.new_credential.saveCredential()
-        self.assertEqual(len(Credential.credentials),1)
-
-    def test_findCredential(self):
-        self.new_credential.saveCredential()
-        confirm_credential = Credential('Facebook','Abdihakym Muhumed','ABDULHAKIM')
-        confirm_credential.saveCredential()
-        found_credential = Credential.findCredential('Facebook')
-        self.assertEqual(found_credential.account_name,confirm_credential.account_name)
-
-
-    def test_showCredentials(self):
-        self.new_credential.saveCredential()
-        chosen_credential = Credential('Gmail','abdihakim1434@gmail.com','Abdulhakim1434')
-        chosen_credential.saveCredential()
-        shown_credential = Credential.showCredentials('Gmail')
-        self.assertEqual(shown_credential.account_name,chosen_credential.account_name)
-        self.assertEqual(shown_credential.user_name,chosen_credential.user_name)
-        self.assertEqual(shown_credential.pass_word,chosen_credential.pass_word)
-
-
-    def test_deleteCredential(self):
-        self.new_credential.saveCredential()
-        toDelete = Credential('Gmail','abdihakim1434@gmail.com','Abdulhakim9')
-        toDelete.saveCredential()
-        toDelete.deleteCredential()
-        self.assertEqual(len(Credential.credentials),1)
 
 
 if __name__ == '__main__':
