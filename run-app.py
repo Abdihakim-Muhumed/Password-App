@@ -85,24 +85,46 @@ def main():
                     print("lo -  to log out of your account")
                     print('\n')
                     short_code = input().lower()
-                    if short_code == 'nw'
+                    if short_code == 'nw':
                         print('Enter the account name you want to create credentials for:')
                         theAccount = input().capitalise()
                         print('Enter username: ')
                         username = input()
                         print("Do you want to generate a password or enter your own password? Enter 'y' to generate a password or 'n' to create your own.")
                         pass_code =input()
-                        if pass_code = 'y':
+                        if pass_code =='y':
                             print('Enter length of password you desire:')
                             p_length = int(input())
                             password = generate_password(p_length)
                             print(f'Password created ; {password}')
 
-                        elif pass_code = 'n':
+                        elif pass_code == 'n':
                             print('Enter password:')
                             password = input()
 
                         else :
                             print('OOPS! I did not get that please enter correct code')
 
-                        
+                        credential = create_credentials(theAccount,username,password)
+                        save_credentials(user,credential)
+                        print(f"Credentials for {credential.the_account} successfully created and saved")
+
+                    elif short_code == 'vw':
+                        Print('Enter account name you want to view its credentials: ')
+                        to_view = input().capitalise()
+                        to_show = find_credentials(user,to_view)
+                        if to_show:
+                            print(f" Account : {to_show.account_name}")
+                            print('\n')
+                            print(f"Username : {to_show.user_name}")
+                            print('\n')
+                            print(f"Password : {to_show.pass_word}")
+
+                        else :
+                            print('Accout credentials not found . Please create.')
+
+                    elif short_code == 'va':
+                        all_credentials = view_all_credentials(user)
+                        print("Account              Username                Password")
+                        for credential in all_credentials:
+                            print(f"{credential.account_name}      {credential.user_name}      {credential.pass_word}")
