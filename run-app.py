@@ -128,3 +128,43 @@ def main():
                         print("Account              Username                Password")
                         for credential in all_credentials:
                             print(f"{credential.account_name}      {credential.user_name}      {credential.pass_word}")
+
+                    elif short_code == 'dl':
+                        print("Enter Account name to delete : ")
+                        to_delete_account = input().capitalise()
+                        to_delete_credentials = find_credentials(user,to_delete_account)
+                        if to_delete_credentials:
+                            delete_credentials(user,to_delete_account)
+                            print("Account deleted !")
+
+                        else :
+                            print("Account does not exist.")
+
+
+                    elif short_code == 'da':
+                        while True:
+                            print("Are you sure to delete all credentials? ")
+                            print('\n')
+                            print('Reply with; y - for yes and; n - for no!')
+                            confirm_code = input()
+                            if confirm_code == 'y':
+                                delete_all_credentials(user)
+                                print('You have deleted all your credentials!')
+
+                            elif confirm_code == 'n':
+                                break
+
+                            else:
+                                print("Invalid choice!!!")
+
+
+                    elif short_code == 'lo':
+                        break
+
+                    else :
+                        print("Invalid choice!!!")
+                        print('\n')
+
+
+if __name__ =='__main__':
+    main()
