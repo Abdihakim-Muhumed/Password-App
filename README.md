@@ -6,11 +6,10 @@ The project is about building an application that will help users manage their p
 
 # Setup Instructions:
 
-Click this link to launch the app: https://abdihakim-muhumed.github.io/Password-App/
+Run app on python shell
 
 # Technologies
- 1.Python
- 2.Github(for deployment)
+ Python
 
  # Contact Us:
 
